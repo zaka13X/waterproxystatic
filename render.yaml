@@ -1,7 +1,10 @@
 services:
-  - name: uv-static
-    type: web
-    runtime: static
-    env: static
-    publish_path: ./
-    branch: main
+  - type: static
+    name: idk-null
+    publishDir: . # Change this to your folder name if your HTML/JS files are in a subfolder like 'public' or 'dist'
+    routes:
+      - path: /active/uv/uv.sw.js
+        headers:
+          - key: Service-Worker-Allowed
+            value: /active/go/
+            
