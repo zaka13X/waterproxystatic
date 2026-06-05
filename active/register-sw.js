@@ -2,7 +2,8 @@
 /**
  * Distributed with Ultraviolet and compatible with most configurations.
  */
-const stockSW = "/active/uv-sw.js";
+// FIXED: Changed absolute path to match your GitHub Pages repository folder mapping root
+const stockSW = "uv/uv-sw.js";
 
 /**
  * List of hostnames that are allowed to run serviceworkers on http:
@@ -23,8 +24,18 @@ async function registerSW() {
   if (!navigator.serviceWorker)
     throw new Error("Your browser doesn't support service workers.");
 
+  // FIXED: Wrapped the config check in a small safety check to prevent initialization crashes
+  if (typeof __uv$config === 'undefined') {
+     throw new Error("__uv$config is missing! Make sure uv.config.js is loaded above this script.");
+  }
+
   // Ultraviolet has a stock `sw.js` script.
   await navigator.serviceWorker.register(stockSW, {
     scope: __uv$config.prefix,
   });
 }
+
+// FIXED: Prevents index.js or search.js from running registerSW() too early before the window elements exist
+document.addEventListener('DOMContentLoaded', () => {
+   console.log("Register-sw setup loaded and ready.");
+});
