@@ -3,7 +3,7 @@
  * Distributed with Ultraviolet and compatible with most configurations.
  */
 // FIXED: Changed absolute path to match your GitHub Pages repository folder mapping root
-const stockSW = "uv/uv-sw.js";
+const stockSW = "uv/uv.sw.js";
 
 /**
  * List of hostnames that are allowed to run serviceworkers on http:
